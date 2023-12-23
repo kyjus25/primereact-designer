@@ -1,0 +1,37 @@
+---
+import 'primeicons/primeicons.css';
+const menu = ['Form', 'Button', 'Data', 'Panel', 'Overlay', 'File', 'Menu', 'Messages', 'Media', 'Misc'];
+const URL = Astro.url;
+
+console.log('page is', URL);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body class="bg-[#212121] p-4">
+    <header class="text-white mb-4">
+      <h1 class="text-xl">Prime Designer</h1>
+    </header>
+    <div class="flex gap-4">
+      <aside class="text-white">
+        {
+          menu.map((item) => {
+            const isCurrent = URL.pathname === `/${item.toLowerCase()}`;
+            return (
+              <a class={`block ${isCurrent ? 'bg-black/30' : 'hover:bg-black/10'} p-2 w-52 rounded-lg`} href={item.toLowerCase()}>
+                {item}
+              </a>
+            );
+          })
+        }
+      </aside>
+      <slot />
+    </div>
+  </body>
+</html>

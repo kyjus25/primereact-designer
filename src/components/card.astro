@@ -1,0 +1,23 @@
+---
+const { title, framework } = Astro.props;
+let logo = null;
+switch (framework) {
+    case 'react':
+        logo = 'https://primefaces.org/cdn/primereact/images/favicon.ico';
+        break;
+    case 'vue':
+        logo = 'https://primevue.org/favicon.ico';
+        break;
+    case 'angular':
+        logo = 'https://primefaces.org/cdn/primeng/images/favicon.png';
+        break;
+}
+---
+
+<div class="bg-white rounded-lg p-4">
+  <h1 class="flex items-center gap-2 text-xl font-bold">
+    <img class="h-6" src={logo}>
+    {title}
+</h1>
+  <slot />
+</div>
