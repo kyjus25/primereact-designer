@@ -2,34 +2,19 @@
 import ReactComponent from '../../components/button/button.tsx';
 import VueComponent from '../../components/button/button.vue';
 
+import * as ThemeHelper from '../../helpers/themes';
 import Base from '../../layouts/base.astro';
 import Card from '../../components/card.astro';
 
-const opts = JSON.parse(Astro.url.searchParams.get('opts') || '[["react","lara"],["vue","lara"]]');
-
-let themes = {};
-for (let i = 0; i < opts.length; i++) {
-  switch (opts[i][1]) {
-    case 'lara':
-      // @ts-ignore
-      themes[opts[i][1]] = await import(`primereact/passthrough/tailwind`).then((i) => (i.default as any).default);
-      break;
-    default:
-      // @ts-ignore
-      themes[opts[i][1]] = await import(`../../themes/${opts[i][1]}`).then((i) => i.default);
-      break;
-  }
-}
-
-const getTheme = (str: string) => {
-  // @ts-ignore
-  return themes[str];
-};
+const opts = ThemeHelper.getOpts(Astro);
+const themes = await ThemeHelper.getThemes(opts);
+// @ts-ignore
+const getTheme = (str: string) => themes[str];
 ---
 
 <Base components={['Button', 'Speed Dial', 'SplitButton']}>
   {
-    opts.map((i) => (
+    opts.map((i: any) => (
       <div class="flex flex-col gap-4 flex-1">
         {i[0] === 'react' && (
           <Card title="Button" framework="React">
@@ -38,7 +23,7 @@ const getTheme = (str: string) => {
         )}
         {i[0] === 'vue' && (
           <Card title="Button" framework="Vue">
-            <ReactComponent theme={getTheme(i[1])} client:load />
+            <VueComponent theme={getTheme(i[1])} client:load />
           </Card>
         )}
         {i[0] === 'ng' && (
