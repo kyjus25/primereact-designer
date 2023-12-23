@@ -2,8 +2,7 @@
 import 'primeicons/primeicons.css';
 const menu = ['Form', 'Button', 'Data', 'Panel', 'Overlay', 'File', 'Menu', 'Messages', 'Media', 'Misc'];
 const URL = Astro.url;
-
-console.log('page is', URL);
+const COMPONENTS = Astro.props.components || [];
 ---
 
 <html lang="en">
@@ -15,8 +14,11 @@ console.log('page is', URL);
     <title>Astro</title>
   </head>
   <body class="bg-[#212121] p-4">
-    <header class="text-white mb-4">
+    <header class="flex items-center justify-between text-white mb-4">
       <h1 class="text-xl">Prime Designer</h1>
+      <div class="flex gap-8">
+        {COMPONENTS.map((i: any) => <a href={`${i.toLowerCase().replaceAll(' ', '_')}`}>{i}</a>)}
+      </div>
     </header>
     <div class="flex gap-4">
       <aside class="text-white">
@@ -24,7 +26,7 @@ console.log('page is', URL);
           menu.map((item) => {
             const isCurrent = URL.pathname === `/${item.toLowerCase()}`;
             return (
-              <a class={`block ${isCurrent ? 'bg-black/30' : 'hover:bg-black/10'} p-2 w-52 rounded-lg`} href={item.toLowerCase()}>
+              <a class={`block ${isCurrent ? 'bg-black/30' : 'hover:bg-black/10'} p-2 w-52 rounded-lg`} href={`/${item.toLowerCase()}`}>
                 {item}
               </a>
             );

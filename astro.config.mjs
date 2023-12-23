@@ -6,5 +6,10 @@ import vue from '@astrojs/vue';
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',
+  redirects: {
+    '/': '/form',
+    '/button': '/button/button',
+  },
   integrations: [react(), tailwind(), vue({ appEntrypoint: '/src/components/_vue' })],
 });

@@ -24,7 +24,7 @@ primevue.config.pt = Lara;
   </Container>
   <Title text="Loading" />
   <Container>
-    <Button label="Submit" icon="pi pi-check" loading="{true}" />
+    <Button label="Submit" icon="pi pi-check" loading />
   </Container>
   <Title text="Severity" />
   <Container>

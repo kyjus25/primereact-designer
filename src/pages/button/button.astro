@@ -1,28 +1,52 @@
 ---
+import ReactComponent from '../../components/button/button.tsx';
+import VueComponent from '../../components/button/button.vue';
+
 import Base from '../../layouts/base.astro';
 import Card from '../../components/card.astro';
-import PrimeReactButton from '../../components/button/button.tsx';
-import PrimeVueButton from '../../components/button/button.vue';
 
-const theme = await import(`primereact/passthrough/tailwind`).then((i) => (i.default as any).default);
-// const theme = await import(`../themes/shadcn`).then((i) => i.default);
-console.log(theme.button);
+const opts = JSON.parse(Astro.url.searchParams.get('opts') || '[["react","lara"],["vue","lara"]]');
 
-// const theme = await import(`../themes/shadcn`).then((i) => i.default);
+let themes = {};
+for (let i = 0; i < opts.length; i++) {
+  switch (opts[i][1]) {
+    case 'lara':
+      // @ts-ignore
+      themes[opts[i][1]] = await import(`primereact/passthrough/tailwind`).then((i) => (i.default as any).default);
+      break;
+    default:
+      // @ts-ignore
+      themes[opts[i][1]] = await import(`../../themes/${opts[i][1]}`).then((i) => i.default);
+      break;
+  }
+}
+
+const getTheme = (str: string) => {
+  // @ts-ignore
+  return themes[str];
+};
 ---
 
-<Base>
-  <div class="flex flex-col gap-4 flex-1">
-    <Card title="Button" framework="React">
-      <PrimeReactButton theme={theme} client:load />
-    </Card>
-  </div>
-  <div class="flex flex-col gap-4 flex-1">
-    <Card title="Button" framework="Vue">
-      <PrimeVueButton theme={theme} client:load />
-    </Card>
-  </div>
-  <!-- <div class="flex flex-col gap-4 flex-1">
-    <Card title="Button" framework="angular">Meep</Card>
-  </div> -->
+<Base components={['Button', 'Speed Dial', 'SplitButton']}>
+  {
+    opts.map((i) => (
+      <div class="flex flex-col gap-4 flex-1">
+        {i[0] === 'react' && (
+          <Card title="Button" framework="React">
+            <ReactComponent theme={getTheme(i[1])} client:load />
+          </Card>
+        )}
+        {i[0] === 'vue' && (
+          <Card title="Button" framework="Vue">
+            <ReactComponent theme={getTheme(i[1])} client:load />
+          </Card>
+        )}
+        {i[0] === 'ng' && (
+          <Card title="Button" framework="Angular">
+            Not supported
+          </Card>
+        )}
+      </div>
+    ))
+  }
 </Base>

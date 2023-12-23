@@ -1,0 +1,34 @@
+---
+import Base from './base.astro';
+import Card from '../components/card.astro';
+import PrimeReactButton from '../components/button/button.tsx';
+// import ReactComponent from '../components/button/button.vue';
+
+const props = Astro.props;
+
+console.log(props);
+const ReactComponent = await import('../components/button/button.tsx').then((i) => i.default);
+
+console.log('react component', ReactComponent);
+
+const theme = await import(`primereact/passthrough/tailwind`).then((i) => (i.default as any).default);
+// const theme = await import(`../themes/shadcn`).then((i) => i.default);
+console.log(theme.button);
+---
+
+<Base components={['Button', 'Speed Dial', 'SplitButton']}>
+  <div class="flex flex-col gap-4 flex-1">
+    <Card title="Button" framework="React">
+      <ReactComponent theme={theme} client:load />
+      <!-- <PrimeReactButton theme={theme} client:load /> -->
+    </Card>
+  </div>
+  <div class="flex flex-col gap-4 flex-1">
+    <Card title="Button" framework="Vue">
+      <!-- <PrimeVueButton theme={theme} client:load /> -->
+    </Card>
+  </div>
+  <!-- <div class="flex flex-col gap-4 flex-1">
+    <Card title="Button" framework="angular">Meep</Card>
+  </div> -->
+</Base>
