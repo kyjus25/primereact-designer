@@ -2,22 +2,63 @@
 const { title, framework } = Astro.props;
 let logo = null;
 switch (framework) {
-    case 'react':
-        logo = 'https://primefaces.org/cdn/primereact/images/favicon.ico';
-        break;
-    case 'vue':
-        logo = 'https://primevue.org/favicon.ico';
-        break;
-    case 'angular':
-        logo = 'https://primefaces.org/cdn/primeng/images/favicon.png';
-        break;
+  case 'React':
+    logo = 'https://primefaces.org/cdn/primereact/images/favicon.ico';
+    break;
+  case 'Vue':
+    logo = 'https://primevue.org/favicon.ico';
+    break;
+  case 'Angular':
+    logo = 'https://primefaces.org/cdn/primeng/images/favicon.png';
+    break;
 }
 ---
 
 <div class="bg-white rounded-lg p-4">
-  <h1 class="flex items-center gap-2 text-xl font-bold">
-    <img class="h-6" src={logo}>
-    {title}
-</h1>
+  <h1 class="flex items-center justify-between text-xl font-bold">
+    <div class="flex items-center gap-2">
+      <img class="h-6" src={logo} />
+      {title}
+    </div>
+    <div class="flex items-center gap-2">
+      <select class="border px-2 py-1 rounded-lg">
+        <option>{framework}</option>
+      </select>
+      <select class="border px-2 py-1 rounded-lg">
+        <option>Lara</option>
+      </select>
+    </div>
+  </h1>
+  <img src="/button-vue.jpeg" />
+  <table class="text-black/50">
+    <tr>
+      <td class="border px-2">1</td>
+      <td class="px-2">root</td>
+    </tr>
+    <tr>
+      <td class="border px-2">2</td>
+      <td class="px-2">loadingIcon</td>
+    </tr>
+    <tr>
+      <td class="border px-2">3</td>
+      <td class="px-2">icon</td>
+    </tr>
+    <tr>
+      <td class="border px-2">4</td>
+      <td class="px-2">label</td>
+    </tr>
+    <tr>
+      <td class="border px-2">5</td>
+      <td class="px-2">badge</td>
+    </tr>
+    <tr>
+      <td class="border px-2">6</td>
+      <td class="px-2">tooltip</td>
+    </tr>
+    <tr>
+      <td class="border px-2">7</td>
+      <td class="px-2">hooks</td>
+    </tr>
+  </table>
   <slot />
 </div>

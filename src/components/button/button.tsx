@@ -157,7 +157,7 @@ export default (props: any) => {
       <Title text="Template" />
       <Container>
         <Button className="bg-bluegray-600 hover:bg-bluegray-400 border-bluegray-700">
-          <img alt="logo" src="https://primefaces.org/cdn/primereact/images/primereact-logo-light.svg" className="h-2rem"></img>
+          <img alt="logo" src="https://primefaces.org/cdn/primereact/images/primereact-logo-light.svg" className="h-2rem" />
         </Button>
       </Container>
     </PrimeReactProvider>
