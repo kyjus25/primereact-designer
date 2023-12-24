@@ -24,8 +24,9 @@ switch (framework) {
       <select class="border px-2 py-1 rounded-lg">
         <option>{framework}</option>
       </select>
-      <select class="border px-2 py-1 rounded-lg">
+      <select class="border px-2 py-1 rounded-lg" onchange="onChangeTheme(this.value)">
         <option>Lara</option>
+        <option>shadcn</option>
       </select>
     </div>
   </h1>
@@ -62,3 +63,13 @@ switch (framework) {
   </table>
   <slot />
 </div>
+
+<script is:inline>
+  const onChangeTheme = (val) => {
+    // console.log(document.currentScript.getAttribute('data-test'));
+    console.log('changed', val);
+  };
+  const onChangeFramework = (val) => {
+    console.log('changed', option.value);
+  };
+</script>
