@@ -1,5 +1,13 @@
 ---
-const { title, framework } = Astro.props;
+const { title, framework, index } = Astro.props;
+const opts = Astro.url.searchParams.get('opts') ? JSON.parse(Astro.url.searchParams.get('opts') || '[]') : [];
+const getTheme = () => {
+  if (opts && opts[index]) {
+    return opts[index][1];
+  }
+  return 'lara';
+};
+const theme = getTheme();
 let logo = null;
 switch (framework) {
   case 'React':
@@ -21,13 +29,17 @@ switch (framework) {
       {title}
     </div>
     <div class="flex items-center gap-2">
-      <select class="border px-2 py-1 rounded-lg">
-        <option>{framework}</option>
+      <select id={`framework-switcher-${index}`} class="border px-2 py-1 rounded-lg">
+        <option selected={framework === 'Vue'}>Vue</option>
+        <option selected={framework === 'React'}>React</option>
+        <option selected={framework === 'Angular'}>Angular</option>
       </select>
-      <select class="border px-2 py-1 rounded-lg" onchange="onChangeTheme(this.value)">
-        <option>Lara</option>
-        <option>shadcn</option>
+      <select id={`theme-switcher-${index}`} class="border px-2 py-1 rounded-lg">
+        <option selected={theme.toLowerCase() === 'lara'}>Lara</option>
+        <option selected={theme.toLowerCase() === 'shadcn'}>shadcn</option>
       </select>
+      <button id=`add-index-${index}` class="border px-3 py-1 rounded-lg hover:bg-black/10">+</button>
+      <button disabled={opts.length === 1} id=`remove-index-${index}` class="border px-3 py-1 rounded-lg hover:bg-black/10">-</button>
     </div>
   </h1>
   <img src="/button-vue.jpeg" />
@@ -64,12 +76,42 @@ switch (framework) {
   <slot />
 </div>
 
-<script is:inline>
-  const onChangeTheme = (val) => {
-    // console.log(document.currentScript.getAttribute('data-test'));
-    console.log('changed', val);
+<script define:vars={{ index }}>
+  const getOpts = () => {
+    let opts = new URL(document.URL).searchParams.get('opts');
+    opts = opts ? JSON.parse(opts) : [];
+    return opts;
   };
-  const onChangeFramework = (val) => {
-    console.log('changed', option.value);
+  const modifyOpts = (index, type, val) => {
+    const opts = getOpts();
+    let theme = type === 'theme' ? val : document.getElementById(`theme-switcher-${index}`).value;
+    let framework = type === 'framework' ? val : document.getElementById(`framework-switcher-${index}`).value;
+    if (!opts[index]) {
+      opts.push([framework.toLowerCase(), theme.toLowerCase()]);
+    } else {
+      opts[index] = [framework.toLowerCase(), theme.toLowerCase()];
+    }
+    var newRelativePathQuery = window.location.pathname + '?opts=' + JSON.stringify(opts);
+    window.location.href = newRelativePathQuery;
   };
+  document.getElementById(`theme-switcher-${index}`).addEventListener('change', (e) => {
+    console.log('changed', e.target.value, e.target, new URL(document.URL));
+    modifyOpts(index, 'theme', e.target.value);
+  });
+  document.getElementById(`framework-switcher-${index}`).addEventListener('change', (e) => {
+    console.log('changed', e.target.value, e.target);
+    modifyOpts(index, 'framework', e.target.value);
+  });
+  document.getElementById(`add-index-${index}`).addEventListener('click', (e) => {
+    const opts = getOpts();
+    opts.push(['vue', 'lara']);
+    var newRelativePathQuery = window.location.pathname + '?opts=' + JSON.stringify(opts);
+    window.location.href = newRelativePathQuery;
+  });
+  document.getElementById(`remove-index-${index}`).addEventListener('click', (e) => {
+    let opts = getOpts();
+    opts = opts.filter((i, idx) => index !== idx);
+    var newRelativePathQuery = window.location.pathname + '?opts=' + JSON.stringify(opts);
+    window.location.href = newRelativePathQuery;
+  });
 </script>

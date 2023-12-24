@@ -1,5 +1,5 @@
 export const getOpts = (Astro: any) => {
-  return JSON.parse(Astro.url.searchParams.get('opts') || '[["react","lara"],["vue","lara"]]');
+  return JSON.parse(Astro.url.searchParams.get('opts') || '[["vue","lara"]]');
 };
 
 export const getThemes = async (opts: any) => {
@@ -12,7 +12,7 @@ export const getThemes = async (opts: any) => {
         break;
       default:
         // @ts-ignore
-        themes[opts[i][1]] = await import(`../../themes/${opts[i][1]}`).then((i) => i.default);
+        themes[opts[i][1]] = await import(`../themes/${opts[i][1]}.js`).then((i) => i.default);
         break;
     }
   }

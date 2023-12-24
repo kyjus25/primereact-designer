@@ -14,20 +14,20 @@ const getTheme = (str: string) => themes[str];
 
 <Base components={['Button', 'Speed Dial', 'SplitButton']}>
   {
-    opts.map((i: any) => (
+    opts.map((i: any, index: number) => (
       <div class="flex flex-col gap-4 flex-1">
         {i[0] === 'react' && (
-          <Card title="Button" framework="React">
+          <Card title="Button" framework="React" index={index}>
             <ReactComponent theme={getTheme(i[1])} client:load />
           </Card>
         )}
         {i[0] === 'vue' && (
-          <Card title="Button" framework="Vue">
+          <Card title="Button" framework="Vue" index={index}>
             <VueComponent theme={getTheme(i[1])} client:load />
           </Card>
         )}
-        {i[0] === 'ng' && (
-          <Card title="Button" framework="Angular">
+        {i[0] === 'angular' && (
+          <Card title="Button" framework="Angular" index={index}>
             Not supported
           </Card>
         )}
