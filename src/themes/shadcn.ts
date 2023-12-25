@@ -6,11 +6,17 @@ const btn: string = 'flex gap-2 items-center justify-center rounded-md text-sm t
 const pressable: string =
   'relative before:absolute before:content-[""] before:w-full before:h-full before:hover:bg-white/20 before:top-0 before:left-0 before:rounded-md';
 
-const primary: string = 'bg-primary text-white';
-
 export default {
   button: {
-    root: classNames(btn, pressable, primary, 'px-4'),
+    root: ({ props }: any) =>
+      classNames(
+        btn,
+        pressable,
+        {
+          'bg-primary text-white': !props.text,
+        },
+        'px-4'
+      ),
     label: ({ props, ctx }: any) => {
       console.log(props);
       return classNames({
