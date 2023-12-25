@@ -12,7 +12,7 @@ export const getThemes = async (opts: any) => {
         break;
       default:
         // @ts-ignore
-        themes[opts[i][1]] = await import(`../themes/${opts[i][1]}.js`).then((i) => i.default);
+        themes[opts[i][1]] = await import(`../themes/${opts[i][1]}.ts`).then((i) => i.default);
         break;
     }
   }
