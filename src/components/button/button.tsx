@@ -150,9 +150,15 @@ export default (props: any) => {
       </Container>
       <Title text="Sizes" />
       <Container>
-        <Button label="Small" icon="pi pi-check" size="small" />
-        <Button label="Normal" icon="pi pi-check" />
-        <Button label="Large" icon="pi pi-check" size="large" />
+        <div>
+          <Button label="Small" icon="pi pi-check" size="small" />
+        </div>
+        <div>
+          <Button label="Normal" icon="pi pi-check" />
+        </div>
+        <div>
+          <Button label="Large" icon="pi pi-check" size="large" />
+        </div>
       </Container>
       <Title text="Template" />
       <Container>
