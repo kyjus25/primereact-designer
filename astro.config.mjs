@@ -16,6 +16,7 @@ export default defineConfig({
     '/media': '/media/carousel',
     '/messages': '/messages/inlinemessage',
     '/misc': '/misc/avatar',
+    '/data': '/data/datascroller',
     '/overlay': '/overlay/confirmdialog',
     '/panel': '/panel/accordion',
   },
