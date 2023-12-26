@@ -1,10 +1,5 @@
 import type { PrimeReactPTOptions } from 'primereact/api';
-import { classNames } from 'primereact/utils';
-
-const btn: string = 'flex gap-2 items-center justify-center rounded-md text-sm transition-colors p-2 whitespace-nowrap';
-
-const pressable: string =
-  'relative before:absolute before:content-[""] before:w-full before:h-full before:hover:bg-white/20 before:top-0 before:left-0 before:rounded-md';
+import classNames from 'classnames';
 
 export const TRANSITIONS = {
   toggleable: {
@@ -648,9 +643,7 @@ export default {
     icon: 'text-base mr-2',
   },
   toast: {
-    root: {
-      className: classNames('w-96'),
-    },
+    root: classNames('w-96'),
     // TODO: DOESN'T WORK
     // message: ({ state, index }) => ({
     //   className: classNames('my-4 rounded-md w-full', {
@@ -682,8 +675,9 @@ export default {
   },
   //BUTTONS
   button: {
-    root: ({ props, context }) => ({
-      className: classNames(
+    // root: 'bg-red-500',
+    root: ({ props, context }) =>
+      classNames(
         // Always
         'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom',
         'transition duration-200 ease-in-out',
@@ -745,9 +739,8 @@ export default {
         // Disabled
         { 'opacity-60 pointer-events-none cursor-default': context.disabled }
       ),
-    }),
-    label: ({ props }) => ({
-      className: classNames(
+    label: ({ props }) =>
+      classNames(
         'flex-1',
         'duration-200',
         // 'font-medium',
@@ -756,26 +749,21 @@ export default {
         },
         { 'invisible w-0': props.label == null }
       ),
-    }),
-    icon: ({ props }) => ({
-      className: classNames('mx-0', {
+    icon: ({ props }) =>
+      classNames('mx-0', {
         'mr-2': props.iconPos == 'left' && props.label != null,
         'ml-2 order-1': props.iconPos == 'right' && props.label != null,
         'mb-2': props.iconPos == 'top' && props.label != null,
         'mt-2 order-2': props.iconPos == 'bottom' && props.label != null,
       }),
-    }),
-    loadingIcon: ({ props }) => ({
-      className: classNames('mx-0', {
+    loadingIcon: ({ props }) =>
+      classNames('mx-0', {
         'mr-2': props.loading && props.iconPos == 'left' && props.label != null,
         'ml-2 order-1': props.loading && props.iconPos == 'right' && props.label != null,
         'mb-2': props.loading && props.iconPos == 'top' && props.label != null,
         'mt-2 order-2': props.loading && props.iconPos == 'bottom' && props.label != null,
       }),
-    }),
-    badge: ({ props }) => ({
-      className: classNames({ 'ml-2 w-4 h-4 leading-none flex items-center justify-center': props.badge }),
-    }),
+    badge: ({ props }) => classNames({ 'ml-2 w-4 h-4 leading-none flex items-center justify-center': props.badge }),
   },
   speeddial: {
     root: 'absolute flex',
@@ -817,23 +805,15 @@ export default {
     }),
   },
   splitbutton: {
-    root: ({ props }) => ({
-      className: classNames('inline-flex relative', 'rounded-md', { 'shadow-lg': props.raised }),
-    }),
+    root: ({ props }) => classNames('inline-flex relative', 'rounded-md', { 'shadow-lg': props.raised }),
     button: {
-      root: ({ parent }) => ({
-        className: classNames('rounded-r-none border-r-0', { 'rounded-l-full': parent.props.rounded }),
-      }),
+      root: ({ parent }) => classNames('rounded-r-none border-r-0', { 'rounded-l-full': parent.props.rounded }),
       icon: 'mr-2',
     },
-    menu: {
-      className: classNames('outline-none', 'py-1	px-0 rounded-md	 list-none bg-white	border-none shadow-lg'),
-    },
+    menu: classNames('outline-none', 'py-1	px-0 rounded-md	 list-none bg-white	border-none shadow-lg'),
     menuList: 'm-0 p-0 border-none outline-none no-underline list-none',
     menuButton: {
-      root: ({ parent }) => ({
-        className: classNames('rounded-l-none', { 'rounded-r-full': parent.props.rounded }),
-      }),
+      root: ({ parent }) => classNames('rounded-l-none', { 'rounded-r-full': parent.props.rounded }),
       label: 'hidden',
     },
     anchor:
@@ -1869,24 +1849,23 @@ export default {
     }),
   },
   tag: {
-    root: ({ props }) => ({
-      className: classNames(
+    root: ({ props }) =>
+      classNames(
         'inline-flex items-center justify-center',
-        'bg-blue-500 text-white text-xs font-semibold px-2 py-1 ',
+        'bg-info text-white text-xs font-semibold px-2 py-1 ',
         {
-          'bg-gray-500 ': props.severity == 'secondary',
-          'bg-green-500 ': props.severity == 'success',
-          'bg-blue-500 ': props.severity == 'info',
-          'bg-orange-500 ': props.severity == 'warning',
-          'bg-purple-500 ': props.severity == 'help',
-          'bg-red-500 ': props.severity == 'danger',
+          'bg-secondary': props.severity == 'secondary',
+          'bg-success': props.severity == 'success',
+          'bg-info': props.severity == 'info',
+          'bg-warning': props.severity == 'warning',
+          'bg-help': props.severity == 'help',
+          'bg-danger': props.severity == 'danger',
         },
         {
           'rounded-md': !props.rounded,
           'rounded-full': props.rounded,
         }
       ),
-    }),
     value: 'leading-6',
     icon: 'mr-1 text-sm',
   },

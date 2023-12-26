@@ -1,7 +1,7 @@
 <script setup>
 import { usePrimeVue } from 'primevue/config';
 const props = defineProps(['theme']);
-console.log('THEME', props.theme);
+// console.log('THEME', props.theme);
 import Button from 'primevue/button';
 import Title from '../title.vue';
 import Container from '../container.vue';

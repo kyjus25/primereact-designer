@@ -1,6 +1,6 @@
 ---
-import ReactComponent from '../../components/button/splitbutton.tsx';
-import VueComponent from '../../components/button/splitbutton.vue';
+import ReactComponent from '../../components/button/button.tsx';
+import VueComponent from '../../components/button/button.vue';
 
 import * as ThemeHelper from '../../helpers/themes';
 import Base from '../../layouts/base.astro';
@@ -17,17 +17,17 @@ const getTheme = (str: string) => themes[str];
     opts.map((i: any, index: number) => (
       <div class="flex flex-col gap-4 flex-1">
         {i[0] === 'react' && (
-          <Card title="SplitButton" framework="React" index={index}>
+          <Card title="AutoComplete" framework="React" index={index}>
             <ReactComponent theme={getTheme(i[1])} client:load />
           </Card>
         )}
         {i[0] === 'vue' && (
-          <Card title="SplitButton" framework="Vue" index={index}>
+          <Card title="AutoComplete" framework="Vue" index={index}>
             <VueComponent theme={getTheme(i[1])} client:load />
           </Card>
         )}
         {i[0] === 'angular' && (
-          <Card title="SplitButton" framework="Angular" index={index}>
+          <Card title="AutoComplete" framework="Angular" index={index}>
             Not supported
           </Card>
         )}

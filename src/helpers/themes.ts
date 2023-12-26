@@ -8,7 +8,9 @@ export const getThemes = async (opts: any) => {
     switch (opts[i][1]) {
       case 'lara':
         // @ts-ignore
-        themes[opts[i][1]] = await import(`primereact/passthrough/tailwind`).then((i) => (i.default as any).default);
+        if (opts[i][0] === 'react')
+          themes[opts[i][1]] = await import(`primereact/passthrough/tailwind`).then((i) => (i.default as any).default);
+        if (opts[i][0] === 'vue') themes[opts[i][1]] = await import(`primevue/passthrough/tailwind`).then((i) => i.default as any);
         break;
       default:
         // @ts-ignore

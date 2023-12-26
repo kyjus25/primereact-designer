@@ -12,7 +12,7 @@ const themes = await ThemeHelper.getThemes(opts);
 const getTheme = (str: string) => themes[str];
 ---
 
-<Base components={['Button', 'Speed Dial', 'SplitButton']}>
+<Base>
   {
     opts.map((i: any, index: number) => (
       <div class="flex flex-col gap-4 flex-1">
