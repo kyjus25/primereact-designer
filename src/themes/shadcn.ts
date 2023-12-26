@@ -692,29 +692,18 @@ export default {
   button: {
     root: ({ props, context }) => ({
       className: classNames(
+        // Always
         'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom',
         'transition duration-200 ease-in-out',
         'focus:outline-none focus:outline-offset-0',
+        // Link
+        {
+          'text-primary': props.link,
+        },
+        // Filled
         {
           'bg-primary text-white shadow relative before:absolute before:content-[""] before:w-full before:h-full before:hover:bg-white/15 before:top-0 before:left-0 before:rounded-md':
             !props.link && props.severity === null && !props.text && !props.outlined && !props.plain,
-          'text-primary': props.link,
-        },
-        // {
-        //   'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(176,185,198,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(203,213,225,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
-        //     props.severity === 'secondary',
-        //   'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(136,234,172,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(134,239,172,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
-        //     props.severity === 'success',
-        //   'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
-        //     props.severity === 'info',
-        //   'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(250,207,133,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(252,211,77,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
-        //     props.severity === 'warning',
-        //   'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(212,170,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(216,180,254,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
-        //     props.severity === 'help',
-        //   'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(247,162,162,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(252,165,165,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
-        //     props.severity === 'danger',
-        // },
-        {
           'bg-secondary text-primary shadow-sm relative before:absolute before:content-[""] before:w-full before:h-full before:hover:bg-white/15 before:top-0 before:left-0 before:rounded-md':
             props.severity === 'secondary' && !props.text && !props.outlined && !props.plain,
           'text-white dark:text-gray-900 bg-green-500 dark:bg-green-400 border border-green-500 dark:border-green-400 hover:bg-green-600 dark:hover:bg-green-500 hover:border-green-600 dark:hover:border-green-500':
@@ -728,10 +717,13 @@ export default {
           'text-white dark:text-gray-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-500 hover:border-red-600 dark:hover:border-red-500':
             props.severity === 'danger' && !props.text && !props.outlined && !props.plain,
         },
+        // Raised
         {
           'shadow-lg': props.raised,
         },
+        // Rounded
         { 'rounded-md': !props.rounded, 'rounded-full': props.rounded },
+        // Text Severities
         {
           'bg-transparent border-transparent': props.text && !props.plain,
           'text-primary hover:bg-gray-300/30': props.text && (props.severity === null || props.severity === 'info') && !props.plain,
@@ -741,13 +733,16 @@ export default {
           'text-purple-500 dark:text-purple-400 hover:bg-purple-300/20': props.text && props.severity === 'help' && !props.plain,
           'text-red-500 dark:text-red-400 hover:bg-red-300/20': props.text && props.severity === 'danger' && !props.plain,
         },
+        // Text Raised
         { 'shadow-lg': props.raised && props.text },
+        // Text Outlined
         {
           'text-gray-500 hover:bg-gray-300/30': props.plain && props.text,
           'text-gray-500 border border-gray-500 hover:bg-gray-300/30': props.plain && props.outlined,
           'text-white bg-gray-500 border border-gray-500 hover:bg-gray-600 hover:border-gray-600':
             props.plain && !props.outlined && !props.text,
         },
+        // Outlined
         {
           'bg-transparent border': props.outlined && !props.plain,
           'text-black border-neutral hover:bg-gray-300/30':
@@ -763,12 +758,15 @@ export default {
           'text-red-500 dark:text-red-400 border border-red-500 dark:border-red-400 hover:bg-red-300/20':
             props.outlined && props.severity === 'danger' && !props.plain,
         },
+        // Sizes
         {
           'text-xs py-2 px-3': props.size === 'small',
           'px-4 py-2 text-sm': props.size === null,
           'text-xl py-3 px-4': props.size === 'large',
         },
+        // Icon Pos
         { 'flex-column': props.iconPos == 'top' || props.iconPos == 'bottom' },
+        // Disabled
         { 'opacity-60 pointer-events-none cursor-default': context.disabled }
       ),
     }),
