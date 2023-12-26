@@ -25,6 +25,21 @@ export default (props: any) => {
         <Button label="Submit" icon="pi pi-check" />
         <Button label="Submit" icon="pi pi-check" iconPos="right" />
       </Container>
+      <Title text="Icon Pos" />
+      <Container>
+        <div>
+          <Button label="Left" icon="pi pi-check" iconPos="left" />
+        </div>
+        <div>
+          <Button label="Right" icon="pi pi-check" iconPos="right" />
+        </div>
+        <div>
+          <Button label="Top" icon="pi pi-check" iconPos="top" />
+        </div>
+        <div>
+          <Button label="Bottom" icon="pi pi-check" iconPos="bottom" />
+        </div>
+      </Container>
       <Title text="Loading" />
       <Container>
         <Button label="Submit" icon="pi pi-check" loading={true} />
@@ -41,7 +56,13 @@ export default (props: any) => {
       </Container>
       <Title text="Disabled" />
       <Container>
-        <Button label="Submit" disabled />
+        <Button label="Primary" disabled />
+        <Button label="Secondary" severity="secondary" disabled />
+        <Button label="Success" severity="success" disabled />
+        <Button label="Info" severity="info" disabled />
+        <Button label="Warning" severity="warning" disabled />
+        <Button label="Help" severity="help" disabled />
+        <Button label="Danger" severity="danger" disabled />
       </Container>
       <Title text="Raised" />
       <Container>

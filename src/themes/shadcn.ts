@@ -649,40 +649,32 @@ export default {
   },
   toast: {
     root: {
-      className: classNames('w-96', 'opacity-90'),
+      className: classNames('w-96'),
     },
-    message: ({ state, index }) => ({
-      className: classNames('my-4 rounded-md w-full', {
-        'bg-blue-100 border-solid border-0 border-l-4 border-blue-500 text-blue-700':
-          state.messages[index] && state.messages[index].message.severity == 'info',
-        'bg-green-100 border-solid border-0 border-l-4 border-green-500 text-green-700':
-          state.messages[index] && state.messages[index].message.severity == 'success',
-        'bg-orange-100 border-solid border-0 border-l-4 border-orange-500 text-orange-700':
-          state.messages[index] && state.messages[index].message.severity == 'warn',
-        'bg-red-100 border-solid border-0 border-l-4 border-red-500 text-red-700':
-          state.messages[index] && state.messages[index].message.severity == 'error',
-      }),
-    }),
-    content: 'flex items-center py-5 px-7',
-    icon: {
-      className: classNames('w-6 h-6', 'text-lg mr-2'),
-    },
-    text: 'text-base font-normal flex flex-col flex-1 grow shrink ml-4',
+    // TODO: DOESN'T WORK
+    // message: ({ state, index }) => ({
+    //   className: classNames('my-4 rounded-md w-full', {
+    //     'bg-blue-100 border-solid border-0 border-l-4 border-blue-500 text-blue-700':
+    //       state.messages[index] && state.messages[index].message.severity == 'info',
+    //     'bg-green-100 border-solid border-0 border-l-4 border-green-500 text-green-700':
+    //       state.messages[index] && state.messages[index].message.severity == 'success',
+    //     'bg-orange-100 border-solid border-0 border-l-4 border-orange-500 text-orange-700':
+    //       state.messages[index] && state.messages[index].message.severity == 'warn',
+    //     'bg-red-100 border-solid border-0 border-l-4 border-red-500 text-red-700':
+    //       state.messages[index] && state.messages[index].message.severity == 'error',
+    //   }),
+    // }),
+    message: 'relative group bg-canvas shadow-lg p-4 border border-neutral rounded-md mb-4 text-sm',
+    icon: 'hidden',
+    // TODO: shadcn has gap, doesn't work
     summary: 'font-bold block',
-    detail: 'mt-1 block',
-    closebutton: {
-      className: classNames(
-        'w-8 h-8 rounded-full bg-transparent transition duration-200 ease-in-out',
-        'ml-auto overflow-hidden relative',
-        'flex items-center justify-center',
-        'hover:bg-white/30'
-      ),
-    },
+    detail: 'opacity-90',
+    closeButton: 'absolute top-4 right-4 text-primary/50 hidden group-hover:block hover:text-primary',
     transition: {
       timeout: { enter: 300, exit: 500 },
       classNames: {
         enter: 'opacity-0 max-h-0 translate-x-0 translate-y-2/4 translate-z-0',
-        enterActive: '!max-h-40 !opacity-90 !translate-y-0 transition-transform transition-opacity duration-300',
+        enterActive: '!max-h-40 !opacity-100 !translate-y-0 transition-transform transition-opacity duration-300',
         exit: 'max-h-40 opacity-90',
         exitActive: '!max-h-0 !opacity-0 !mb-0 overflow-hidden transition-all duration-500 ease-in',
       },
@@ -702,20 +694,15 @@ export default {
         },
         // Filled
         {
-          'bg-primary text-white shadow relative before:absolute before:content-[""] before:w-full before:h-full before:hover:bg-white/15 before:top-0 before:left-0 before:rounded-md':
+          'bg-primary text-canvas shadow hover:bg-primary/80':
             !props.link && props.severity === null && !props.text && !props.outlined && !props.plain,
-          'bg-secondary text-primary shadow-sm relative before:absolute before:content-[""] before:w-full before:h-full before:hover:bg-white/15 before:top-0 before:left-0 before:rounded-md':
+          'bg-secondary text-primary shadow-sm hover:bg-secondary/80':
             props.severity === 'secondary' && !props.text && !props.outlined && !props.plain,
-          'text-white dark:text-gray-900 bg-green-500 dark:bg-green-400 border border-green-500 dark:border-green-400 hover:bg-green-600 dark:hover:bg-green-500 hover:border-green-600 dark:hover:border-green-500':
-            props.severity === 'success' && !props.text && !props.outlined && !props.plain,
-          'text-white dark:text-gray-900 dark:bg-blue-400 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 hover:border-blue-600 dark:hover:bg-blue-500 dark:hover:border-blue-500':
-            props.severity === 'info' && !props.text && !props.outlined && !props.plain,
-          'text-white dark:text-gray-900 bg-orange-500 dark:bg-orange-400 border border-orange-500 dark:border-orange-400 hover:bg-orange-600 dark:hover:bg-orange-500 hover:border-orange-600 dark:hover:border-orange-500':
-            props.severity === 'warning' && !props.text && !props.outlined && !props.plain,
-          'text-white dark:text-gray-900 bg-purple-500 dark:bg-purple-400 border border-purple-500 dark:border-purple-400 hover:bg-purple-600 dark:hover:bg-purple-500 hover:border-purple-600 dark:hover:border-purple-500':
-            props.severity === 'help' && !props.text && !props.outlined && !props.plain,
-          'text-white dark:text-gray-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-500 hover:border-red-600 dark:hover:border-red-500':
-            props.severity === 'danger' && !props.text && !props.outlined && !props.plain,
+          'bg-success text-canvas hover:bg-success/80': props.severity === 'success' && !props.text && !props.outlined && !props.plain,
+          'bg-info text-canvas hover:bg-info/80': props.severity === 'info' && !props.text && !props.outlined && !props.plain,
+          'bg-warning text-canvas hover:bg-warning/80': props.severity === 'warning' && !props.text && !props.outlined && !props.plain,
+          'bg-help text-canvas hover:bg-help/80': props.severity === 'help' && !props.text && !props.outlined && !props.plain,
+          'bg-danger text-canvas hover:bg-danger/80': props.severity === 'danger' && !props.text && !props.outlined && !props.plain,
         },
         // Raised
         {
@@ -726,46 +713,35 @@ export default {
         // Text Severities
         {
           'bg-transparent border-transparent': props.text && !props.plain,
-          'text-primary hover:bg-gray-300/30': props.text && (props.severity === null || props.severity === 'info') && !props.plain,
-          'text-gray-500 dark:text-grayy-400 hover:bg-gray-300/30': props.text && props.severity === 'secondary' && !props.plain,
-          'text-green-500 dark:text-green-400 hover:bg-green-300/20': props.text && props.severity === 'success' && !props.plain,
-          'text-orange-500 dark:text-orange-400 hover:bg-orange-300/20': props.text && props.severity === 'warning' && !props.plain,
-          'text-purple-500 dark:text-purple-400 hover:bg-purple-300/20': props.text && props.severity === 'help' && !props.plain,
-          'text-red-500 dark:text-red-400 hover:bg-red-300/20': props.text && props.severity === 'danger' && !props.plain,
+          'text-primary hover:bg-secondary': props.text && props.severity === null && !props.plain,
+          'text-primary/50 hover:bg-secondary': props.text && props.severity === 'secondary' && !props.plain,
+          'text-info hover:bg-info/10': props.text && props.severity === 'info' && !props.plain,
+          'text-success hover:bg-success/10': props.text && props.severity === 'success' && !props.plain,
+          'text-warning hover:bg-warning/10': props.text && props.severity === 'warning' && !props.plain,
+          'text-help hover:bg-help/10': props.text && props.severity === 'help' && !props.plain,
+          'text-danger hover:bg-danger/10': props.text && props.severity === 'danger' && !props.plain,
         },
         // Text Raised
         { 'shadow-lg': props.raised && props.text },
-        // Text Outlined
-        {
-          'text-gray-500 hover:bg-gray-300/30': props.plain && props.text,
-          'text-gray-500 border border-gray-500 hover:bg-gray-300/30': props.plain && props.outlined,
-          'text-white bg-gray-500 border border-gray-500 hover:bg-gray-600 hover:border-gray-600':
-            props.plain && !props.outlined && !props.text,
-        },
         // Outlined
         {
           'bg-transparent border': props.outlined && !props.plain,
-          'text-black border-neutral hover:bg-gray-300/30':
-            props.outlined && (props.severity === null || props.severity === 'info') && !props.plain,
-          'text-gray-500 dark:text-gray-400 border border-gray-500 dark:border-gray-400 hover:bg-gray-300/30':
-            props.outlined && props.severity === 'secondary' && !props.plain,
-          'text-green-500 dark:text-green-400 border border-green-500 dark:border-green-400 hover:bg-green-300/20':
-            props.outlined && props.severity === 'success' && !props.plain,
-          'text-orange-500 dark:text-orange-400 border border-orange-500 dark:border-orange-400 hover:bg-orange-300/20':
-            props.outlined && props.severity === 'warning' && !props.plain,
-          'text-purple-500 dark:text-purple-400 border border-purple-500 dark:border-purple-400 hover:bg-purple-300/20':
-            props.outlined && props.severity === 'help' && !props.plain,
-          'text-red-500 dark:text-red-400 border border-red-500 dark:border-red-400 hover:bg-red-300/20':
-            props.outlined && props.severity === 'danger' && !props.plain,
+          'text-black border-neutral hover:bg-secondary': props.outlined && props.severity === null && !props.plain,
+          'text-primary/50 hover:bg-secondary': props.outlined && props.severity === 'secondary' && !props.plain,
+          'text-info border-info hover:bg-info/10': props.outlined && props.severity === 'info' && !props.plain,
+          'text-success border-success hover:bg-success/10': props.outlined && props.severity === 'success' && !props.plain,
+          'text-warning border-warning hover:bg-warning/10': props.outlined && props.severity === 'warning' && !props.plain,
+          'text-help border-help hover:bg-help/10': props.outlined && props.severity === 'help' && !props.plain,
+          'text-danger border-danger hover:bg-danger/10': props.outlined && props.severity === 'danger' && !props.plain,
         },
         // Sizes
         {
-          'text-xs py-2 px-3': props.size === 'small',
-          'px-4 py-2 text-sm': props.size === null,
-          'text-xl py-3 px-4': props.size === 'large',
+          'text-xs py-2 px-4': props.size === 'small',
+          'text-sm py-2 px-4': props.size === null,
+          'text-lg py-2 px-4': props.size === 'large',
         },
         // Icon Pos
-        { 'flex-column': props.iconPos == 'top' || props.iconPos == 'bottom' },
+        { 'flex-col': props.iconPos == 'top' || props.iconPos == 'bottom' },
         // Disabled
         { 'opacity-60 pointer-events-none cursor-default': context.disabled }
       ),

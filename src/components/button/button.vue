@@ -1,11 +1,13 @@
 <script setup>
 import { usePrimeVue } from 'primevue/config';
+const props = defineProps(['theme']);
+console.log('THEME', props.theme);
 import Button from 'primevue/button';
 import Title from '../title.vue';
 import Container from '../container.vue';
-import Lara from 'primevue/passthrough/tailwind';
+// import Lara from 'primevue/passthrough/tailwind';
 const primevue = usePrimeVue();
-primevue.config.pt = Lara;
+primevue.config.pt = props.theme;
 </script>
 <template>
   <Title text="Basic" />

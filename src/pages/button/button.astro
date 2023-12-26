@@ -18,11 +18,73 @@ const getTheme = (str: string) => themes[str];
       <div class="flex flex-col gap-4 flex-1">
         {i[0] === 'react' && (
           <Card title="Button" framework="React" index={index}>
+            <img src="/button-react.jpeg" />
+            <table class="text-black/50">
+              <tr>
+                <td class="border px-2">1</td>
+                <td class="px-2">root</td>
+              </tr>
+              <tr>
+                <td class="border px-2">2</td>
+                <td class="px-2">loadingIcon</td>
+              </tr>
+              <tr>
+                <td class="border px-2">3</td>
+                <td class="px-2">icon</td>
+              </tr>
+              <tr>
+                <td class="border px-2">4</td>
+                <td class="px-2">label</td>
+              </tr>
+              <tr>
+                <td class="border px-2">5</td>
+                <td class="px-2">badge</td>
+              </tr>
+              <tr>
+                <td class="border px-2">6</td>
+                <td class="px-2">tooltip</td>
+              </tr>
+              <tr>
+                <td class="border px-2">7</td>
+                <td class="px-2">hooks</td>
+              </tr>
+            </table>
             <ReactComponent theme={getTheme(i[1])} client:load />
           </Card>
         )}
         {i[0] === 'vue' && (
           <Card title="Button" framework="Vue" index={index}>
+            <img src="/button-vue.jpeg" />
+            <table class="text-black/50">
+              <tr>
+                <td class="border px-2">1</td>
+                <td class="px-2">root</td>
+              </tr>
+              <tr>
+                <td class="border px-2">2</td>
+                <td class="px-2">loadingIcon</td>
+              </tr>
+              <tr>
+                <td class="border px-2">3</td>
+                <td class="px-2">icon</td>
+              </tr>
+              <tr>
+                <td class="border px-2">4</td>
+                <td class="px-2">label</td>
+              </tr>
+              <tr>
+                <td class="border px-2">5</td>
+                <td class="px-2">badge</td>
+              </tr>
+              <tr>
+                <td class="border px-2">6</td>
+                <td class="px-2">tooltip</td>
+              </tr>
+              <tr>
+                <td class="border px-2">7</td>
+                <td class="px-2">hooks</td>
+              </tr>
+            </table>
             <VueComponent theme={getTheme(i[1])} client:load />
           </Card>
         )}

@@ -7,13 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#000000',
-        secondary: '#f4f4f5',
-        neutral: '#e4e4e7',
-        success: '#1ea97c',
-        info: '#2463EB',
-        warning: '#f59f0a',
-        danger: '#7F1D1E',
+        canvas: '#FFFFFF',
+        primary: '#000000', // shadcn filled primary
+        secondary: '#F4F4F5', // shadcn filled secondary, hover color as well
+        neutral: '#E4E4E7', // shadcn primary border color
+        success: '#1EA97C',
+        info: '#3B82F6',
+        warning: '#F59F0A',
+        help: '#A955F7',
+        danger: '#DC2627',
       },
     },
   },

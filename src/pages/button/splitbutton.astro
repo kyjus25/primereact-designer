@@ -1,28 +1,37 @@
 ---
+import ReactComponent from '../../components/button/splitbutton.tsx';
+import VueComponent from '../../components/button/splitbutton.vue';
+
+import * as ThemeHelper from '../../helpers/themes';
 import Base from '../../layouts/base.astro';
 import Card from '../../components/card.astro';
-import PrimeReactButton from '../../components/button/button.tsx';
-import PrimeVueButton from '../../components/button/button.vue';
 
-const theme = await import(`primereact/passthrough/tailwind`).then((i) => (i.default as any).default);
-// const theme = await import(`../themes/shadcn`).then((i) => i.default);
-console.log(theme.button);
-
-// const theme = await import(`../themes/shadcn`).then((i) => i.default);
+const opts = ThemeHelper.getOpts(Astro);
+const themes = await ThemeHelper.getThemes(opts);
+// @ts-ignore
+const getTheme = (str: string) => themes[str];
 ---
 
 <Base components={['Button', 'Speed Dial', 'SplitButton']}>
-  <div class="flex flex-col gap-4 flex-1">
-    <Card title="Button" framework="React">
-      <PrimeReactButton theme={theme} client:load />
-    </Card>
-  </div>
-  <div class="flex flex-col gap-4 flex-1">
-    <Card title="Button" framework="Vue">
-      <PrimeVueButton theme={theme} client:load />
-    </Card>
-  </div>
-  <!-- <div class="flex flex-col gap-4 flex-1">
-    <Card title="Button" framework="angular">Meep</Card>
-  </div> -->
+  {
+    opts.map((i: any, index: number) => (
+      <div class="flex flex-col gap-4 flex-1">
+        {i[0] === 'react' && (
+          <Card title="SplitButton" framework="React" index={index}>
+            <ReactComponent theme={getTheme(i[1])} client:load />
+          </Card>
+        )}
+        {i[0] === 'vue' && (
+          <Card title="SplitButton" framework="Vue" index={index}>
+            <VueComponent theme={getTheme(i[1])} client:load />
+          </Card>
+        )}
+        {i[0] === 'angular' && (
+          <Card title="SplitButton" framework="Angular" index={index}>
+            Not supported
+          </Card>
+        )}
+      </div>
+    ))
+  }
 </Base>
