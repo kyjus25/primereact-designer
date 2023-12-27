@@ -1,0 +1,37 @@
+---
+import ReactComponent from '../../components/button/splitbutton.tsx';
+import VueComponent from '../../components/button/splitbutton.vue';
+
+import * as ThemeHelper from '../../helpers/themes';
+import Base from '../../layouts/base.astro';
+import Card from '../../components/card.astro';
+
+const opts = ThemeHelper.getOpts(Astro);
+const themes = await ThemeHelper.getThemes(opts);
+// @ts-ignore
+const getTheme = (str: string) => themes[str];
+---
+
+<Base>
+  {
+    opts.map((i: any, index: number) => (
+      <div class="flex flex-col gap-4 flex-1">
+        {i[0] === 'react' && (
+          <Card title="ToggleButton" framework="React" index={index}>
+            <ReactComponent theme={getTheme(i[1])} client:load />
+          </Card>
+        )}
+        {i[0] === 'vue' && (
+          <Card title="ToggleButton" framework="Vue" index={index}>
+            <VueComponent theme={getTheme(i[1])} client:load />
+          </Card>
+        )}
+        {i[0] === 'angular' && (
+          <Card title="ToggleButton" framework="Angular" index={index}>
+            Not supported
+          </Card>
+        )}
+      </div>
+    ))
+  }
+</Base>
